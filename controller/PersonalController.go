@@ -24,10 +24,10 @@ func PersonalPage(ctx *gin.Context) {
 	var articles []model.Article
 	db.Order("created_at desc").Find(&articles).Where("user.id = ?", user.ID)
 
-	var threads []model.Thread
-	db.Order("created_at desc").Find(&threads).Where("user.id = ?", user.ID)
+	var posts []model.Post
+	db.Order("created_at desc").Find(&posts).Where("user.id = ?", user.ID)
 
-	ctx.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"user": dto.ToUserDto(user), "articles": articles, "threads": threads}})
+	ctx.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"user": dto.ToUserDto(user), "articles": articles, "posts": posts}})
 }
 
 func PersonalUpdate(ctx *gin.Context) {
